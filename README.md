@@ -9,9 +9,9 @@ $ npm install osseus-server
 
 ### Usage
 ```bash
-const OsseusServer = require('osseus-server')
-
 const app = await OsseusServer.init(config)
+const server = await OsseusServer.start(config)
+console.log(`server is listening on port: ${server.address().port}`)
 ```
 
 #### Config
