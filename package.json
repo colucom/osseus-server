@@ -1,0 +1,22 @@
+{
+  "name": "osseus-server",
+  "version": "0.0.1",
+  "description": "Osseus server",
+  "scripts": {
+    "build": "npm install",
+    "test": "standard"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colucom/osseus-server.git"
+  },
+  "author": "LiorRabin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "standard": "^11.0.1"
+  }
+}
