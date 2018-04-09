@@ -14,7 +14,7 @@ const init = function (config) {
 
 const start = async function (config) {
   const self = this
-  const port = config.get('PORT')
+  const port = config.server.port || config.port
   const server = await self.app.listen(port)
   return server
 }
