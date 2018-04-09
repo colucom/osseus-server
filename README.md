@@ -17,4 +17,4 @@ console.log(`server is listening on port: ${server.address().port}`)
 #### Config
 config should have a "get" function which receives the key name and returns the value
 
-* `PORT` - port to listen on
+* `OSSEUS_SERVER_PORT` - port to listen on

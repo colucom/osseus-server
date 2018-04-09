@@ -3,6 +3,9 @@ const path = require('path')
 const init = function (config) {
   const self = this
   return new Promise((resolve, reject) => {
+    config.get = function (key) {
+      return config.server[key.toLowerCase()] || config[key.toLowerCase()]
+    }
     const app = require(path.join(__dirname, '/lib/app'))(config)
     self.app = app
     resolve(app)
