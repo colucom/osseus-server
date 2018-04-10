@@ -17,6 +17,7 @@ const start = async function () {
   const config = this.osseus.config
   const port = config.osseus_server.port || config.port
   const server = await this.app.listen(port)
+  console.info(`server is listening on port: ${server.address().port}`)
   this.server = server
 }
 
