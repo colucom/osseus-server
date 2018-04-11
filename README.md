@@ -18,3 +18,6 @@ console.log(`server is listening on port: ${server.address().port}`)
 config should have a "get" function which receives the key name and returns the value
 
 * `OSSEUS_SERVER_PORT` - port to listen on
+
+## License
+Code released under the [MIT License](https://github.com/colucom/osseus-server/blob/master/LICENSE).
