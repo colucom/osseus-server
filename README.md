@@ -2,24 +2,78 @@
 
 # Osseus Server
 
-Osseus [express](https://github.com/expressjs/express) based web server
+[express](https://github.com/expressjs/express) based osseus web server module
 
-### Install
+## Install
 ```bash
 $ npm install osseus-server
 ```
 
-### Usage
-```bash
-const app = await OsseusServer.init(config)
-const server = await OsseusServer.start(config)
-console.log(`server is listening on port: ${server.address().port}`)
+## Usage
+
+#### Configuration
+
+Mandatory:
+
+* `OSSEUS_SERVER_PORT`
+
+Optiona:
+
+* `REQUEST_ID_HEADER`
+	* set request id header name to enable [cc-request-id](https://www.npmjs.com/package/cc-request-id) middleware
+* `MAINTENANCE_ENABLED`
+	* set to `true` to enable maintenance mode on server
+* `MAINTENANCE_MESSAGE`
+	* maintenance message sent to clients when maintenance mode is enabled
+* `ALLOWED_IP`
+	* list of ip addresses allowed to bypass maintenance mode
+* `COMPRESION_ENABLED`
+	* set to `true` to enable [compression](https://github.com/expressjs/compression) middleware
+* `COMPRESSION_LEVEL`
+	* [compressions level](https://github.com/expressjs/compression#level) if compression is enabled
+* `MORGAN_FORMAT`
+	* format for [morgan](https://github.com/expressjs/morgan)
+	* see [morgan predefined formats](https://github.com/expressjs/morgan#predefined-formats)
+	* default is [tiny](https://github.com/expressjs/morgan#tiny)
+* `CORS_WHITELIST`
+	* [configuring CORS w/ dynamic origin](https://www.npmjs.com/package/cors#configuring-cors-w-dynamic-origin)
+* `STATIC_ENGINE_TYPE`
+* `VIEWS_FOLDER`
+	* [use template engines](https://expressjs.com/en/guide/using-template-engines.html)
+* `STATIC_FOLDER`
+	* [serve static files](https://expressjs.com/en/starter/static-files.html)
+
+
+#### Example
+First, create `index.js`:
+
+```javascript
+const Osseus = require('osseus')
+
+const main = async () => {
+	try {
+		// init osseus
+		const osseus = await Osseus.init()
+  	} catch (err) {
+		console.error(err)
+  	}
+}
+
+main()
+
 ```
 
-#### Config
-config should have a "get" function which receives the key name and returns the value
+Running:
 
-* `OSSEUS_SERVER_PORT` - port to listen on
+```bash
+$ node index.js --OSSEUS_SERVER_PORT 8080
+```
+
+Will result in:
+
+```sh
+server is listening on port: 8080
+```
 
 ## License
 Code released under the [MIT License](https://github.com/colucom/osseus-server/blob/master/LICENSE).
