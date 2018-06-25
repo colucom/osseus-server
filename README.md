@@ -17,7 +17,7 @@ Mandatory:
 
 * `OSSEUS_SERVER_PORT`
 
-Optiona:
+Optional:
 
 * `REQUEST_ID_HEADER`
 	* set request id header name to enable [cc-request-id](https://www.npmjs.com/package/cc-request-id) middleware
