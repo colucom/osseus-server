@@ -9,11 +9,17 @@ const init = function (osseus) {
   })
 }
 
-const start = async function () {
-  const port = this.osseus.config.osseus_server.port || this.osseus.config.port
-  const server = await this.app.listen(port)
-  console.info(`server is listening on port: ${server.address().port}`)
-  this.server = server
+const start = function () {
+  return new Promise((resolve, reject) => {
+    const port = this.osseus.config.osseus_server.port || this.osseus.config.port
+    const server = this.app.listen(port, () => {
+      console.info(`server is listening on port: ${server.address().port}`)
+      this.server = server
+      resolve()
+    }).on('error', err => {
+      reject(err)
+    })
+  })
 }
 
 module.exports = {
