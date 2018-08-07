@@ -25,12 +25,16 @@ Optional:
 	* set to `true` to enable maintenance mode on server
 * `MAINTENANCE_MESSAGE`
 	* maintenance message sent to clients when maintenance mode is enabled
+* `MAINTENANCE_OVERRIDE_HEADER`
+	* bypass maintenance mode with this header
 * `ALLOWED_IP`
 	* list of ip addresses allowed to bypass maintenance mode
 * `COMPRESION_ENABLED`
 	* set to `true` to enable [compression](https://github.com/expressjs/compression) middleware
 * `COMPRESSION_LEVEL`
 	* [compressions level](https://github.com/expressjs/compression#level) if compression is enabled
+* `NO_COMPRESSION_HEADER`
+	* don't compress responses with this request header
 * `MORGAN_FORMAT`
 	* format for [morgan](https://github.com/expressjs/morgan)
 	* see [morgan predefined formats](https://github.com/expressjs/morgan#predefined-formats)
