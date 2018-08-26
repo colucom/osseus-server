@@ -46,6 +46,10 @@ Optional:
 	* [use template engines](https://expressjs.com/en/guide/using-template-engines.html)
 * `STATIC_FOLDER`
 	* [serve static files](https://expressjs.com/en/starter/static-files.html)
+* `ADD_HEALTHCHECK`
+	* add `/healthcheck` endpoint which returns `OK` with status code 200
+* `ADD_IS_RUNNING`
+	* add `/is_running` endpoint which returns `OK` with status code 200
 
 
 #### Example
