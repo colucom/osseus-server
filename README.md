@@ -79,5 +79,8 @@ Will result in:
 server is listening on port: 8080
 ```
 
+## Contributing
+Please see [contributing guidelines](https://github.com/colucom/osseus-server/blob/master/.github/CONTRIBUTING.md).
+
 ## License
 Code released under the [MIT License](https://github.com/colucom/osseus-server/blob/master/LICENSE).
