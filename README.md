@@ -19,36 +19,36 @@ Mandatory:
 
 Optional:
 
-* `REQUEST_ID_HEADER`
+* `OSSEUS_SERVER_REQUEST_ID_HEADER`
 	* set request id header name to enable [cc-request-id](https://www.npmjs.com/package/cc-request-id) middleware
-* `MAINTENANCE_ENABLED`
+* `OSSEUS_SERVER_MAINTENANCE_ENABLED`
 	* set to `true` to enable maintenance mode on server
-* `MAINTENANCE_MESSAGE`
+* `OSSEUS_SERVER_MAINTENANCE_MESSAGE`
 	* maintenance message sent to clients when maintenance mode is enabled
-* `MAINTENANCE_OVERRIDE_HEADER`
+* `OSSEUS_SERVER_MAINTENANCE_OVERRIDE_HEADER`
 	* bypass maintenance mode with this header
-* `ALLOWED_IP`
+* `OSSEUS_SERVER_ALLOWED_IP`
 	* list of ip addresses allowed to bypass maintenance mode
-* `COMPRESION_ENABLED`
+* `OSSEUS_SERVER_COMPRESION_ENABLED`
 	* set to `true` to enable [compression](https://github.com/expressjs/compression) middleware
-* `COMPRESSION_LEVEL`
+* `OSSEUS_SERVER_COMPRESSION_LEVEL`
 	* [compressions level](https://github.com/expressjs/compression#level) if compression is enabled
-* `NO_COMPRESSION_HEADER`
+* `OSSEUS_SERVER_NO_COMPRESSION_HEADER`
 	* don't compress responses with this request header
-* `MORGAN_FORMAT`
+* `OSSEUS_SERVER_MORGAN_FORMAT`
 	* format for [morgan](https://github.com/expressjs/morgan)
 	* see [morgan predefined formats](https://github.com/expressjs/morgan#predefined-formats)
 	* default is [tiny](https://github.com/expressjs/morgan#tiny)
-* `CORS_WHITELIST`
+* `OSSEUS_SERVER_CORS_WHITELIST`
 	* [configuring CORS w/ dynamic origin](https://www.npmjs.com/package/cors#configuring-cors-w-dynamic-origin)
-* `STATIC_ENGINE_TYPE`
-* `VIEWS_FOLDER`
+* `OSSEUS_SERVER_STATIC_ENGINE_TYPE`
+* `OSSEUS_SERVER_VIEWS_FOLDER`
 	* [use template engines](https://expressjs.com/en/guide/using-template-engines.html)
-* `STATIC_FOLDER`
+* `OSSEUS_SERVER_STATIC_FOLDER`
 	* [serve static files](https://expressjs.com/en/starter/static-files.html)
-* `ADD_HEALTHCHECK`
+* `OSSEUS_SERVER_ADD_HEALTHCHECK`
 	* add `/healthcheck` endpoint which returns `OK` with status code 200
-* `ADD_IS_RUNNING`
+* `OSSEUS_SERVER_ADD_IS_RUNNING`
 	* add `/is_running` endpoint which returns `OK` with status code 200
 
 
