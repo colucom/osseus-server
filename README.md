@@ -6,7 +6,7 @@
 
 ## Install
 ```bash
-$ npm install osseus-server
+$ npm install @colucom/osseus-server
 ```
 
 ## Usage
