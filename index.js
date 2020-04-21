@@ -1,28 +1,65 @@
-const path = require('path')
+const path = require("path")
 
 const init = function (osseus) {
   this.osseus = osseus
   return new Promise((resolve, reject) => {
-    const app = require(path.join(__dirname, '/lib/app'))(osseus.config)
+    const app = require(path.join(__dirname, "/lib/app"))(osseus.config)
     this.app = app
+
+    // Load the osseus-moleculer-web module if needed
+    const shouldUseMoleculerWebAsMiddleware =
+      this.osseus.config.osseus_server.should_use_moleculer_web_as_middleware ||
+      false
+    if (shouldUseMoleculerWebAsMiddleware) {
+      try {
+        const OsseusMoleculerWeb = require("osseus-moleculer-web")
+        const moleculer = OsseusMoleculerWeb.init()
+        osseus["moleculer"] = moleculer.broker
+
+        this.moleculerWebService = moleculer.service
+      } catch (err) {}
+    }
+
     resolve(this)
   })
 }
 
 const start = function () {
   return new Promise((resolve, reject) => {
-    const port = this.osseus.config.osseus_server.port || this.osseus.config.port
-    const server = this.app.listen(port, () => {
-      console.info(`server is listening on port: ${server.address().port}`)
-      this.server = server
-      resolve()
-    }).on('error', err => {
-      reject(err)
-    })
+    // Load middelwares and add them to the express
+
+    const cwd = process.cwd()
+    const envMiddewaresValue = this.osseus.config.osseus_server.middlewares_path
+    if (envMiddewaresValue) {
+      try {
+        const middlewaresPath = path.join(cwd, envMiddewaresValue)
+        const middlewares = require(middlewaresPath)
+        for (const middleware of middlewares) {
+          this.app.use(middleware)
+        }
+      } catch (err) {}
+    }
+
+    //Adding moleculer-web api gateway service as middleware to express if needed
+    if (this.moleculerWebService) {
+      this.app.use("api", this.moleculerWebService.express())
+    }
+
+    const port =
+      this.osseus.config.osseus_server.port || this.osseus.config.port
+    const server = this.app
+      .listen(port, () => {
+        console.info(`server is listening on port: ${server.address().port}`)
+        this.server = server
+        resolve()
+      })
+      .on("error", (err) => {
+        reject(err)
+      })
   })
 }
 
 module.exports = {
   init: init,
-  start: start
+  start: start,
 }
