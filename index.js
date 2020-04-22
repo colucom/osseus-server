@@ -2,7 +2,7 @@ const path = require("path")
 
 const init = function (osseus) {
   this.osseus = osseus
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const app = require(path.join(__dirname, "/lib/app"))(osseus.config)
     this.app = app
 
@@ -13,7 +13,7 @@ const init = function (osseus) {
     if (shouldUseMoleculerWebAsMiddleware) {
       try {
         const OsseusMoleculerWeb = require("osseus-moleculer-web")
-        const moleculer = OsseusMoleculerWeb.init(osseus)
+        const moleculer = await OsseusMoleculerWeb.init(osseus)
         osseus["moleculer"] = moleculer.broker
 
         this.moleculerWebService = moleculer.service
