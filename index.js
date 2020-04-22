@@ -12,12 +12,14 @@ const init = function (osseus) {
       false
     if (shouldUseMoleculerWebAsMiddleware) {
       try {
-        const OsseusMoleculerWeb = require("osseus-moleculer-web")
+        const OsseusMoleculerWeb = require("@colucom/osseus-moleculerweb")
         const moleculer = await OsseusMoleculerWeb.init(osseus)
         osseus["moleculer"] = moleculer.broker
 
         this.moleculerWebService = moleculer.service
-      } catch (err) {}
+      } catch (err) {
+        console.log(`Crash Error: ${err}`)
+      }
     }
 
     resolve(this)
