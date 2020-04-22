@@ -13,7 +13,7 @@ const init = function (osseus) {
     if (shouldUseMoleculerWebAsMiddleware) {
       try {
         const OsseusMoleculerWeb = require("osseus-moleculer-web")
-        const moleculer = OsseusMoleculerWeb.init()
+        const moleculer = OsseusMoleculerWeb.init(osseus)
         osseus["moleculer"] = moleculer.broker
 
         this.moleculerWebService = moleculer.service
