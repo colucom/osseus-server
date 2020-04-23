@@ -13,10 +13,10 @@ const init = function (osseus) {
     if (shouldUseMoleculerWebAsMiddleware) {
       try {
         const OsseusMoleculerWeb = require("@colucom/osseus-moleculerweb")
-        const moleculer = await OsseusMoleculerWeb.init(osseus)
-        osseus["moleculer"] = moleculer.broker
+        const moleculerObj = await OsseusMoleculerWeb.init(osseus)
+        osseus["moleculer"] = moleculerObj.moleculer.broker
 
-        this.moleculerWebService = moleculer.service
+        this.moleculerWebService = moleculerObj.moleculer.service
       } catch (err) {
         console.log(`Crash Error: ${err}`)
       }
@@ -35,7 +35,7 @@ const start = function () {
     if (envMiddewaresValue) {
       try {
         const middlewaresPath = path.join(cwd, envMiddewaresValue)
-        const middlewares = require(middlewaresPath)
+        const middlewares = require(middlewaresPath).default
         for (const middleware of middlewares) {
           this.app.use(middleware)
         }
