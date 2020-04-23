@@ -44,7 +44,7 @@ const start = function () {
 
     //Adding moleculer-web api gateway service as middleware to express if needed
     if (this.moleculerWebService) {
-      this.app.use("api", this.moleculerWebService.express())
+      this.app.use("/api", this.moleculerWebService.express())
     }
 
     const port =
