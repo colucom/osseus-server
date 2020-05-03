@@ -29,10 +29,6 @@ const init = function (osseus) {
 const start = function () {
   return new Promise((resolve, reject) => {
 
-    // Configure Logger as middleware
-
-    // morgan...
-
     // Load middelwares and add them to the express
 
     const cwd = process.cwd()
