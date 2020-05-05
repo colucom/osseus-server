@@ -1,4 +1,5 @@
 const path = require('path')
+const request = require('request')
 
 const { MoleculerError } = require('moleculer').Errors
 
@@ -144,6 +145,29 @@ const start = function () {
         console.error('end of stack error', err)
         res.status(500).send({ error: err })
       }
+    })
+
+    this.app.use((req, res, next) => {
+      console.info(
+        `=> REDIRECT to ${this.osseus.config.community_base_url}${req.originalUrl}`
+      )
+
+      req
+        .pipe(
+          request[req.method.toLowerCase()](
+            `${this.osseus.config.community_base_url}${req.originalUrl}`
+          )
+        )
+        .on('error', (err) => {
+          console.info(err)
+          res.setHeader('Content-Type', 'application/json; charset=utf-8')
+          res.writeHead(500)
+          res.end(
+            (err && err.message) ||
+              'An error occured while redirecting to community'
+          )
+        })
+        .pipe(res)
     })
 
     const port =
