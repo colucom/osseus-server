@@ -26,7 +26,7 @@ To use the moleculer-web api gateway module as a middleware of the express, this
 
 ##### Optional:
 
-<u>Logging</u> 
+***Logging***
 
 To use custom logging as a middleware of the express, it's necessary to config this 2 configurations.
 
@@ -36,7 +36,7 @@ To use custom logging as a middleware of the express, it's necessary to config t
 
 	* the custom path of the logging middelware method in the original project that uses the osseus-server.
 
-<u>Custom middlewares</u>
+***Custom middlewares***
 
 To use custom middelwares you should provide path to array of middleware functions.
 
@@ -44,13 +44,13 @@ To use custom middelwares you should provide path to array of middleware functio
 
 	*  the custom path of the array of middelware functions in the original project that uses the osseus-server.
 
-<u>Errors Map json</u>
+***Errors Map json***
 
 To use custom errors map json you should provide path to this json.
 
 * `OSSEUS_SERVER_ERRORS_MAP_PATH: 'Custom Path'`
 
-<u>Handle 404 Errors - Redirect the request to another server</u>
+***Handle 404 Errors - Redirect the request to another server***
 
 If you wish to redirect the request to another server  when 404 not found error occures you should provide base url of this server.
 
