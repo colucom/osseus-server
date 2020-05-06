@@ -147,15 +147,21 @@ const start = function () {
       }
     })
 
+    // Handle 404 Errors
     this.app.use((req, res, next) => {
+      if (!this.osseus.config.redirect_base_url) {
+        res.status(404).send({ error: '404 NOT FOUND' })
+        return
+      }
+
       console.info(
-        `=> REDIRECT to ${this.osseus.config.community_base_url}${req.originalUrl}`
+        `=> REDIRECT to ${this.osseus.config.redirect_base_url}${req.originalUrl}`
       )
 
       req
         .pipe(
           request[req.method.toLowerCase()](
-            `${this.osseus.config.community_base_url}${req.originalUrl}`
+            `${this.osseus.config.redirect_base_url}${req.originalUrl}`
           )
         )
         .on('error', (err) => {
