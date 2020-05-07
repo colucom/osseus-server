@@ -9,6 +9,53 @@
 $ npm install @colucom/osseus-server
 ```
 
+## Usage with MOLECULER-WEB AS MIDDELWARE
+
+#### Configuration
+
+##### Mandatory:
+
+To use the moleculer-web api gateway module as a middleware of the express, this configuration are mandatory.
+
+* `OSSEUS_MOLECULERWEB_LOAD: false`
+	* the init of the osseus module will be preformed as part of this module code and not in the init of the osseus it self.
+
+* `OSSEUS_SERVER_SHOULD_USE_MOLECULER_WEB_AS_MIDDLEWARE: true`
+	* this flag indicates to the module to use the moleculer-web osseus module.
+
+
+##### Optional:
+
+***Logging***
+
+To use custom logging as a middleware of the express, it's necessary to config this 2 configurations.
+
+* ` OSSEUS_SERVER_SHOULD_USE_CUSTOM_LOGGING_METHOD: true`
+
+* `OSSEUS_SERVER_CUSTOM_LOGGING_METHOD_PATH: 'Custom Path'`
+
+	* the custom path of the logging middelware method in the original project that uses the osseus-server.
+
+***Custom middlewares***
+
+To use custom middelwares you should provide path to array of middleware functions.
+
+* `OSSEUS_SERVER_MIDDLEWARES_PATH: 'Custom Path'`
+
+	*  the custom path of the array of middelware functions in the original project that uses the osseus-server.
+
+***Errors Map json***
+
+To use custom errors map json you should provide path to this json.
+
+* `OSSEUS_SERVER_ERRORS_MAP_PATH: 'Custom Path'`
+
+***Handle 404 Errors - Redirect the request to another server***
+
+If you wish to redirect the request to another server  when 404 not found error occures you should provide base url of this server.
+
+* `REDIRECT_BASE_URL: 'Custom URL'`
+
 ## Usage
 
 #### Configuration
