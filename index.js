@@ -1,5 +1,7 @@
 const path = require('path')
+
 const request = require('request')
+const intoStream = require('into-stream')
 
 const { MoleculerError } = require('moleculer').Errors
 
@@ -158,47 +160,25 @@ const start = function () {
         `=> REDIRECT to ${this.osseus.config.redirect_base_url}${req.originalUrl}`
       )
 
-      if(Object.keys(req.body).length === 0) {
-        req.pipe(
-          request[req.method.toLowerCase()](
-            `${this.osseus.config.redirect_base_url}${req.originalUrl}`
-          )
-        )
-        .on('error', (err) => {
-          console.info(err)
-          res.setHeader('Content-Type', 'application/json; charset=utf-8')
-          res.writeHead(500)
-          res.end(
-            (err && err.message) ||
-              'An error occured while redirecting to community'
-          )
-        })
-        .pipe(res)
+      const stream = intoStream(req.rawBody || '')
+      stream.method = req.method
+      stream.headers = req.headers
 
-      } else {
-        req.pipe(
-          request[req.method.toLowerCase()](
-            `${this.osseus.config.redirect_base_url}${req.originalUrl}`,
-             {
-               form: req.body
-             }
-          ), {
-            end: false
-          }
+      stream.pipe(
+        request[req.method.toLowerCase()](
+          `${this.osseus.config.redirect_base_url}${req.originalUrl}`
         )
-        .on('error', (err) => {
-          console.info(err)
-          res.setHeader('Content-Type', 'application/json; charset=utf-8')
-          res.writeHead(500)
-          res.end(
-            (err && err.message) ||
-              'An error occured while redirecting to community'
-          )
-        })
-        .pipe(res)
-      }
-
-     
+      )
+      .on('error', (err) => {
+        console.info(err)
+        res.setHeader('Content-Type', 'application/json; charset=utf-8')
+        res.writeHead(500)
+        res.end(
+          (err && err.message) ||
+            'An error occured while redirecting to community'
+        )
+      })
+      .pipe(res) 
     })
 
     const port =
