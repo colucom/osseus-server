@@ -158,8 +158,8 @@ const start = function () {
         `=> REDIRECT to ${this.osseus.config.redirect_base_url}${req.originalUrl}`
       )
 
-      req
-        .pipe(
+      if(Object.keys(req.body).length === 0) {
+        req.pipe(
           request[req.method.toLowerCase()](
             `${this.osseus.config.redirect_base_url}${req.originalUrl}`
           )
@@ -174,6 +174,31 @@ const start = function () {
           )
         })
         .pipe(res)
+
+      } else {
+        req.pipe(
+          request[req.method.toLowerCase()](
+            `${this.osseus.config.redirect_base_url}${req.originalUrl}`,
+             {
+               form: req.body
+             }
+          ), {
+            end: false
+          }
+        )
+        .on('error', (err) => {
+          console.info(err)
+          res.setHeader('Content-Type', 'application/json; charset=utf-8')
+          res.writeHead(500)
+          res.end(
+            (err && err.message) ||
+              'An error occured while redirecting to community'
+          )
+        })
+        .pipe(res)
+      }
+
+     
     })
 
     const port =
