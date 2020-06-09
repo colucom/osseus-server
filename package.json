@@ -1,6 +1,6 @@
 {
   "name": "@colucom/osseus-server",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Osseus server",
   "scripts": {
     "build": "npm install",
@@ -21,6 +21,7 @@
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "into-stream": "^5.1.1",
     "moleculer": "^0.13.2",
     "morgan": "^1.9.0",
     "request": "^2.88.0"
