@@ -137,7 +137,7 @@ const start = function () {
         }
 
         console.error(
-          'end of stach with status',
+          'end of stack with status',
           JSON.stringify({ ...response, data: err.data })
         )
 
