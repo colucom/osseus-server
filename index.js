@@ -1,4 +1,5 @@
 const path = require('path')
+const http = require('http')
 
 const request = require('request')
 const intoStream = require('into-stream')
@@ -9,6 +10,8 @@ const init = function (osseus) {
   this.osseus = osseus
   return new Promise(async (resolve, reject) => {
     const app = require(path.join(__dirname, '/lib/app'))(osseus.config)
+    const server = http.createServer(app)
+    osseus.server = server
     this.app = app
 
     // Load the osseus-moleculer-web module if needed
@@ -31,6 +34,16 @@ const init = function (osseus) {
   })
 }
 
+const unless = (path, middleware) => {
+  return (req, res, next) => {
+    if (path === req.path || path === req.baseUrl) {
+      return next()
+    } else {
+      return middleware(req, res, next)
+    }
+  }
+}
+
 const start = function () {
   return new Promise((resolve, reject) => {
     // Load middelwares and add them to the express
@@ -48,7 +61,9 @@ const start = function () {
 
     //Adding moleculer-web api gateway service as middleware to express if needed
     if (this.moleculerWebService) {
-      this.app.use(this.moleculerWebService.express())
+      this.app.use(
+        unless('/sockets/notifications', this.moleculerWebService.express())
+      )
     }
 
     // Configure error middlewares
@@ -164,21 +179,22 @@ const start = function () {
       stream.method = req.method
       stream.headers = req.headers
 
-      stream.pipe(
-        request[req.method.toLowerCase()](
-          `${this.osseus.config.redirect_base_url}${req.originalUrl}`
+      stream
+        .pipe(
+          request[req.method.toLowerCase()](
+            `${this.osseus.config.redirect_base_url}${req.originalUrl}`
+          )
         )
-      )
-      .on('error', (err) => {
-        console.info(err)
-        res.setHeader('Content-Type', 'application/json; charset=utf-8')
-        res.writeHead(500)
-        res.end(
-          (err && err.message) ||
-            'An error occured while redirecting to community'
-        )
-      })
-      .pipe(res) 
+        .on('error', (err) => {
+          console.info(err)
+          res.setHeader('Content-Type', 'application/json; charset=utf-8')
+          res.writeHead(500)
+          res.end(
+            (err && err.message) ||
+              'An error occured while redirecting to community'
+          )
+        })
+        .pipe(res)
     })
 
     const port =
