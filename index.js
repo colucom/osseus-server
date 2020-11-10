@@ -113,7 +113,7 @@ const start = function () {
 
         next({
           message:
-            (err.data && err.data.message) ||
+            err.data ||
             err.message ||
             'Moleculer error occured',
           name,
