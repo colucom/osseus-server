@@ -5,6 +5,7 @@ const request = require('request')
 const intoStream = require('into-stream')
 
 const { MoleculerError } = require('moleculer').Errors
+const OsseusMoleculerWeb = require('@colucom/osseus-moleculerweb')
 
 const init = function (osseus) {
   this.osseus = osseus
@@ -20,7 +21,6 @@ const init = function (osseus) {
       false
     if (shouldUseMoleculerWebAsMiddleware) {
       try {
-        const OsseusMoleculerWeb = require('@colucom/osseus-moleculerweb')
         const moleculerObj = await OsseusMoleculerWeb.init(osseus)
         osseus['moleculer'] = moleculerObj.moleculer.broker
 
