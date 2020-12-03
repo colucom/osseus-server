@@ -1,6 +1,6 @@
 {
   "name": "@colucom/osseus-server",
-  "version": "0.3.9",
+  "version": "1.0.0",
   "description": "Osseus server",
   "scripts": {
     "build": "npm install",
@@ -14,6 +14,7 @@
   "author": "LiorRabin",
   "license": "MIT",
   "dependencies": {
+    "@colucom/osseus-moleculerweb": "^1.0.6",
     "async": "^2.6.0",
     "body-parser": "^1.18.2",
     "cc-request-id": "^0.1.0",
@@ -22,7 +23,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "into-stream": "^5.1.1",
-    "moleculer": "~0.13.2",
+    "moleculer": "~0.14.1",
     "morgan": "^1.9.0",
     "request": "^2.88.0"
   },
