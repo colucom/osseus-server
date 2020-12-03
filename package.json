@@ -1,6 +1,6 @@
 {
   "name": "@colucom/osseus-server",
-  "version": "0.3.8",
+  "version": "1.0.0",
   "description": "Osseus server",
   "scripts": {
     "build": "npm install",
