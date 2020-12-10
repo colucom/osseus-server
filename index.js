@@ -103,7 +103,7 @@ const start = function () {
         console.log('Failed to parse json')
       }
 
-      if (err instanceof MoleculerError) {
+      if (err instanceof MoleculerError || err.constructor.name === 'MoleculerError') {
         const name = (err.data && err.data.name) || 'MoleculerError'
         const code =
           (err.data && err.data.code) ||
@@ -111,6 +111,10 @@ const start = function () {
           999999500
         console.warn(`Moleculer error occured. Name: ${name}, Code: ${code}`)
 
+        if(err.message && typeof err.data === 'object') {
+          err.data.message = err.message
+        }
+        
         next({
           message:
             err.data ||
